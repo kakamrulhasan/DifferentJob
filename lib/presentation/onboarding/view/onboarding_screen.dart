@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/routes/route_name.dart';
 
 import '../viewmodel/onboarding_viewmodel.dart';
 import 'onboarding_page.dart';
@@ -27,12 +28,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/verifysms');
+      Navigator.pushReplacementNamed(context, RouteName.LoginSignupScreen);
     }
   }
 
   void _skip() {
-    Navigator.pushReplacementNamed(context, '/verifysms');
+    Navigator.pushReplacementNamed(context, RouteName.LoginSignupScreen);
   }
 
   @override
@@ -48,13 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            /// Skip
-            Positioned(
-              top: 16,
-              right: 16,
-              child: GestureDetector(onTap: _skip, child: const Text('Skip')),
-            ),
-
+            /// Main content
             Column(
               children: [
                 Expanded(
@@ -68,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
 
-                /// 🔘 Dot Indicator
+                /// Dot indicator
                 OnboardingIndicator(
                   count: vm.pages.length,
                   currentIndex: vm.currentIndex,
@@ -111,6 +106,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
               ],
+            ),
+
+            /// Skip button (ON TOP)
+            Positioned(
+              top: 16,
+              right: 16,
+              child: InkWell(
+                onTap: _skip,
+                child: const Text(
+                  'Skip',
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
+              ),
             ),
           ],
         ),

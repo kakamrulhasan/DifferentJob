@@ -5,14 +5,15 @@ class AppRouter {
     switch (settings.name) {
       case RouteName.splashscreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
-        case RouteName.onBoardingScreen:
+      case RouteName.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
-
+      case RouteName.LoginSignupScreen:
+        return MaterialPageRoute(builder: (_) => const LoginSignupScreen());
 
       default:
         return MaterialPageRoute(
           builder: (_) =>
-              const Scaffold(body: Center(child: Text('Route is not found'),)),
+              const Scaffold(body: Center(child: Text('Route is not found'))),
         );
     }
   }
