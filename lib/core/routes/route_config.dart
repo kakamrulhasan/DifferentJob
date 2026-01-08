@@ -5,6 +5,9 @@ class AppRouter {
     switch (settings.name) {
       case RouteName.splashscreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+        case RouteName.onBoardingScreen:
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+
 
       default:
         return MaterialPageRoute(
