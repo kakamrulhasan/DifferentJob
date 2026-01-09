@@ -57,12 +57,22 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(''),
-                  Text(
-                    'Forgot password',
-                    style: TextStyle(color: ColorManager.primary, fontSize: 18),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        RouteName.ForgotPasswordScreen,
+                      );
+                    },
+                    child: Text(
+                      'Forgot password',
+                      style: TextStyle(
+                        color: ColorManager.primary,
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ],
               ),

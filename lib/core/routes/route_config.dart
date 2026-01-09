@@ -21,6 +21,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CreateProfileScreen());
       case RouteName.CreateProfileNextScreen:
         return MaterialPageRoute(builder: (_) => CreateProfileNextScreen());
+      case RouteName.ForgotPasswordScreen:
+        return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
+      case RouteName.ForgetOptScreen:
+        return MaterialPageRoute(builder: (_) => ForgetOptScreen());
+      case RouteName.SetNewPassword:
+        return MaterialPageRoute(builder: (_) => SetNewPassword());
       default:
         return MaterialPageRoute(
           builder: (_) =>

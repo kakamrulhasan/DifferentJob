@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_5/presentation/auth/widget/primary_button.dart';
 import '../../../core/constansts/color_manager.dart';
 import '../../../core/resource/app_strings.dart';
+import '../../../core/routes/route_name.dart';
 import '../widget/otp_screen.dart';
 
-class VerifyCodeScreen extends StatefulWidget {
-  const VerifyCodeScreen({super.key});
+class ForgetOptScreen extends StatefulWidget {
+  const ForgetOptScreen({super.key});
 
   @override
-  State<VerifyCodeScreen> createState() => _VerificationNumberScreenState();
+  State<ForgetOptScreen> createState() => _VerificationNumberScreenState();
 }
 
-class _VerificationNumberScreenState extends State<VerifyCodeScreen> {
+class _VerificationNumberScreenState extends State<ForgetOptScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +62,7 @@ class _VerificationNumberScreenState extends State<VerifyCodeScreen> {
                     style: TextStyle(color: ColorManager.black, fontSize: 18),
                   ),
                   const Text(
-                    '59s',
+                    '15s',
                     style: TextStyle(
                       color: ColorManager.primary,
                       fontSize: 16,
@@ -97,7 +98,7 @@ class _VerificationNumberScreenState extends State<VerifyCodeScreen> {
               CustomButton(
                 text: 'Verify',
                 onPressed: () {
-                  //Navigator.pushNamed(context, RouteName.CreateSellerAccount);
+                  Navigator.pushNamed(context, RouteName.SetNewPassword);
                 },
               ),
               const SizedBox(height: 20),

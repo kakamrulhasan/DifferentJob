@@ -9,5 +9,8 @@ class RouteName {
   static const String CreateBuyersAccount = '/buyerAccount';
   static const String CreateProfileScreen = '/creatProfile';
   static const String CreateProfileNextScreen = '/createProfileNxt';
+  static const String ForgotPasswordScreen = '/forgetScreen';
+  static const String ForgetOptScreen = '/forgetOTPscreen';
+  static const String SetNewPassword = '/setNewPassword';
 
 }

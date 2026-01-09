@@ -5,8 +5,11 @@ import 'package:flutter_application_5/presentation/auth/screen/create_buyers_acc
 import 'package:flutter_application_5/presentation/auth/screen/create_profile_next_screen.dart';
 import 'package:flutter_application_5/presentation/auth/screen/create_profile_screen.dart';
 import 'package:flutter_application_5/presentation/auth/screen/create_seller_account.dart';
+import 'package:flutter_application_5/presentation/auth/screen/forget_otp_screen.dart';
+import 'package:flutter_application_5/presentation/auth/screen/forgot_password_screen.dart';
 import 'package:flutter_application_5/presentation/auth/screen/login_screen.dart';
 import 'package:flutter_application_5/presentation/auth/screen/login_signup_screen.dart';
+import 'package:flutter_application_5/presentation/auth/screen/set_new_password.dart';
 import 'package:flutter_application_5/presentation/auth/screen/verify_code_screen.dart';
 import 'package:flutter_application_5/presentation/onboarding/view/onboarding_screen.dart';
 import 'package:flutter_application_5/presentation/splash/view/splash_screen.dart';

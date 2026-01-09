@@ -48,7 +48,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 backgroundColor: ColorManager.primary,
                 textColor: ColorManager.secondary,
                 onPressed: () {
-                  // Navigator.pushNamed(context, RouteName.LoginScreen);
+                  Navigator.pushNamed(context, RouteName.CreateSellerAccount);
                 },
               ),
             ],
