@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
-import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/core/routes/route_name.dart';
 import 'package:flutter_application_5/presentation/auth/widget/custom_textfield.dart';
-import 'package:flutter_application_5/presentation/auth/widget/date_picker.dart';
+import 'package:flutter_application_5/presentation/auth/widget/experienceInputCard.dart';
 import 'package:flutter_application_5/presentation/auth/widget/primary_button.dart';
 
 class CreateProfileNextScreen extends StatefulWidget {
@@ -15,11 +14,16 @@ class CreateProfileNextScreen extends StatefulWidget {
 }
 
 class _CreateProfileNextScreenState extends State<CreateProfileNextScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController birthController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
+  TextEditingController aboutController = TextEditingController();
+
+  List<String> experiences = [
+    'Photoshop',
+    'Figma',
+    'Illustrator',
+    'Canva',
+    'UI/UX Design',
+    'Blender',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,9 @@ class _CreateProfileNextScreenState extends State<CreateProfileNextScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: Icon(Icons.arrow_back_ios_new),
                   ),
                   Text(
@@ -55,111 +61,33 @@ class _CreateProfileNextScreenState extends State<CreateProfileNextScreen> {
               ),
 
               const SizedBox(height: 60),
-              const Text('Name', style: TextStyle(color: ColorManager.black54)),
-              const SizedBox(height: 10),
-              CustomTextField(controller: nameController, hintText: 'John Doe'),
-              const SizedBox(height: 10),
+
               const Text(
-                'Email',
+                'Experience',
+                style: TextStyle(color: ColorManager.black54),
+              ),
+              const SizedBox(height: 10),
+              ExperienceInputCard(
+                items: experiences,
+                onChanged: (list) {
+                  debugPrint('Updated Experiences: $list');
+                },
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'About',
                 style: TextStyle(color: ColorManager.black54),
               ),
               const SizedBox(height: 10),
               CustomTextField(
-                controller: emailController,
-                hintText: 'demoinfo@example.com',
+                controller: aboutController,
+                hintText: 'write some about you ....',
+                maxLines: 6,
+                minHeight: 56,
+                keyboardType: TextInputType.multiline,
               ),
-              const SizedBox(height: 10),
-              const Text(
-                'Phone',
-                style: TextStyle(color: ColorManager.black54),
-              ),
-              const SizedBox(height: 10),
-              CustomTextField(
-                controller: phoneController,
-                hintText: '+1 123 432 2342',
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Date of Birth',
-                style: TextStyle(color: ColorManager.black54),
-              ),
-              const SizedBox(height: 10),
-              DatePicker(
-                controller: birthController,
-                hintText: 'Select date of birth',
-                readOnly: true,
-                suffixIcon: const Icon(Icons.calendar_today),
-                onTap: () async {
-                  final DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime(2000),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                  );
-
-                  if (pickedDate != null) {
-                    birthController.text =
-                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-                  }
-                },
-              ),
-
-              const SizedBox(height: 10),
-              const Text(
-                'Location',
-                style: TextStyle(color: ColorManager.black54),
-              ),
-              const SizedBox(height: 10),
-              DatePicker(
-                controller: locationController,
-                hintText: 'Austina, TX',
-                readOnly: true,
-                suffixIcon: const Icon(Icons.location_on_outlined),
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (_) {
-                      return ListView(
-                        padding: const EdgeInsets.all(16),
-                        children: [
-                          ListTile(
-                            title: const Text('Dhaka'),
-                            onTap: () {
-                              locationController.text = 'Dhaka';
-                              Navigator.pop(context);
-                            },
-                          ),
-                          ListTile(
-                            title: const Text('Chittagong'),
-                            onTap: () {
-                              locationController.text = 'Chittagong';
-                              Navigator.pop(context);
-                            },
-                          ),
-                          ListTile(
-                            title: const Text('Sylhet'),
-                            onTap: () {
-                              locationController.text = 'Sylhet';
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
-
-              const SizedBox(height: 10),
-              CustomButton(
-                text: 'Complete',
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    RouteName.CreateProfileNextScreen,
-                  );
-                },
-              ),
+              SizedBox(height: 40),
+              CustomButton(text: 'Complete', onPressed: () {}),
             ],
           ),
         ),
