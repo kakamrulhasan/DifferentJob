@@ -6,4 +6,5 @@ class ImageManager {
   static const String onboarding3 = '$baseUrl/onboarding3.png';
   static const String google = '$baseUrl/google.png';
   static const String facebook = '$baseUrl/facebook.png';
+  static const String profilePic = '$baseUrl/profile.png';
 }

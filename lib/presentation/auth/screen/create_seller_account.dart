@@ -50,7 +50,7 @@ class _CreateSellerAccountState extends State<CreateSellerAccount> {
                         onPressed: () {
                           setState(() {
                             selectedAccountType = 'seller';
-                          });
+                          });        
                         },
                         type: ButtonType.outlined,
                         borderColor: selectedAccountType == 'seller'
@@ -123,7 +123,7 @@ class _CreateSellerAccountState extends State<CreateSellerAccount> {
                 CustomButton(
                   text: 'Sign Up',
                   onPressed: () {
-                    Navigator.pushNamed(context, RouteName.VerifyCodeScreen);
+                    Navigator.pushNamed(context, RouteName.CreateProfileScreen);
                   },
                 ),
                 SizedBox(height: 20),

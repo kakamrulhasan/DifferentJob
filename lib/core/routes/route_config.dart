@@ -17,6 +17,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CreateSellerAccount());
       case RouteName.CreateBuyersAccount:
         return MaterialPageRoute(builder: (_) => CreateBuyersAccount());
+      case RouteName.CreateProfileScreen:
+        return MaterialPageRoute(builder: (_) => CreateProfileScreen());
+      case RouteName.CreateProfileNextScreen:
+        return MaterialPageRoute(builder: (_) => CreateProfileNextScreen());
       default:
         return MaterialPageRoute(
           builder: (_) =>
