@@ -13,7 +13,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case RouteName.VerifyCodeScreen:
         return MaterialPageRoute(builder: (_) => VerifyCodeScreen());
-
+      case RouteName.CreateSellerAccount:
+        return MaterialPageRoute(builder: (_) => CreateSellerAccount());
+      case RouteName.CreateBuyersAccount:
+        return MaterialPageRoute(builder: (_) => CreateBuyersAccount());
       default:
         return MaterialPageRoute(
           builder: (_) =>
