@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/image_manager.dart';
+import 'package:flutter_application_5/core/resource/app_strings.dart';
 
 class OnboardingItem {
   final String title;
@@ -18,20 +20,19 @@ class OnboardingViewModel {
 
   final List<OnboardingItem> pages = [
     OnboardingItem(
-      title: 'Find Trusted Local Help',
-      description:
-          'Explore handyman services, gigs,and community post right in your neighborhood',
-      image: 'assets/images/onboarding1.png',
+      title: AppStrings.onboardingTitle1,
+      description: AppStrings.onboardingdes1,
+      image: ImageManager.onboarding1,
     ),
     OnboardingItem(
-      title: 'Post Jobs Easily',
-      description: 'Post a job and get responses from skilled people nearby',
-      image: 'assets/images/onboarding2.png',
+      title: AppStrings.onboardingTitle2,
+      description: AppStrings.onboardingdes2,
+      image: ImageManager.onboarding2,
     ),
     OnboardingItem(
-      title: 'Get Things Done',
-      description: 'Hire quickly and get your work done with confidence',
-      image: 'assets/images/onboarding3.png',
+      title: AppStrings.onboardingTitle3,
+      description: AppStrings.onboardingdes3,
+      image: ImageManager.onboarding3,
     ),
   ];
 

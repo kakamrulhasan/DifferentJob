@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/color_manager.dart';
 
 enum ButtonType {
   filled,
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
 
   final double height;
   final double borderRadius;
+  final Widget? icon;
 
   const CustomButton({
     super.key,
@@ -30,6 +32,7 @@ class CustomButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.height = 56,
     this.borderRadius = 15,
+    this.icon,
   });
 
   @override
@@ -40,7 +43,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: type == ButtonType.filled ? backgroundColor : Colors.transparent,
+          backgroundColor: type == ButtonType.filled ? backgroundColor : ColorManager.transparent,
           foregroundColor: textColor,
           side: type == ButtonType.outlined ? BorderSide(color: borderColor, width: 2) : null,
           shape: RoundedRectangleBorder(
@@ -57,14 +60,15 @@ class CustomButton extends StatelessWidget {
                   color: textColor,
                 ),
               )
-            : Text(
-                text,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+            : Row(mainAxisAlignment: MainAxisAlignment.center,mainAxisSize: MainAxisSize.min,
+            children: [
+              if(icon !=null)...[
+                icon!,const SizedBox(width: 8,)
+              ],Text(text,style: TextStyle(
+                color: textColor,fontSize: 16,
+                fontWeight: FontWeight.bold
+              ),)
+            ],)
       ),
     );
   }

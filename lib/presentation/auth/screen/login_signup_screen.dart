@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/color_manager.dart';
+import 'package:flutter_application_5/core/constansts/image_manager.dart';
+import 'package:flutter_application_5/core/routes/route_name.dart';
 import 'package:flutter_application_5/presentation/auth/widget/primary_button.dart';
 
 class LoginSignupScreen extends StatefulWidget {
@@ -12,7 +15,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorManager.backgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(28.0),
@@ -22,8 +25,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
               const Spacer(),
               Center(
                 child: Image.asset(
-                  'assets/images/Logo.png',
-                  color: Color(0xFF5E17EB),
+                  ImageManager.splash,
+                  color: ColorManager.primary,
                   width: 200,
                   height: 200,
                 ),
@@ -32,20 +35,20 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
               CustomButton(
                 text: 'Login',
                 type: ButtonType.outlined,
-                borderColor: Colors.purple,
-                textColor: Colors.black,
+                borderColor: ColorManager.primary,
+                textColor: ColorManager.primary,
                 onPressed: () {
-                  print('Outlined button clicked');
+                  Navigator.pushNamed(context, RouteName.LoginScreen);
                 },
               ),
               SizedBox(height: 20),
               CustomButton(
                 text: 'Sign Up',
                 type: ButtonType.filled,
-                backgroundColor: Colors.purple,
-                textColor: Colors.white,
+                backgroundColor: ColorManager.primary,
+                textColor: ColorManager.secondary,
                 onPressed: () {
-                  print('Filled button clicked');
+                  // Navigator.pushNamed(context, RouteName.LoginScreen);
                 },
               ),
             ],

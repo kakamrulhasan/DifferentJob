@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/image_manager.dart';
 
 import '../../../core/routes/route_name.dart';
 
@@ -31,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/Logo.png', width: 141, height: 125),
+              Image.asset(ImageManager.splash, width: 141, height: 125),
             ],
           ),
         ),

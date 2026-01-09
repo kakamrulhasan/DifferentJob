@@ -9,6 +9,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case RouteName.LoginSignupScreen:
         return MaterialPageRoute(builder: (_) => const LoginSignupScreen());
+      case RouteName.LoginScreen:
+        return MaterialPageRoute(builder: (_) => LoginScreen());
+      case RouteName.VerifyCodeScreen:
+        return MaterialPageRoute(builder: (_) => VerifyCodeScreen());
 
       default:
         return MaterialPageRoute(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/routes/route_name.dart';
 
 import '../viewmodel/onboarding_viewmodel.dart';
-import 'onboarding_page.dart';
-import 'onboarding_indicator.dart';
+import 'widgets/onboarding_page.dart';
+import 'widgets/onboarding_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

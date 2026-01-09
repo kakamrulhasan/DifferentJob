@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../viewmodel/onboarding_viewmodel.dart';
+import '../../viewmodel/onboarding_viewmodel.dart';
 
 class OnboardingPage extends StatelessWidget {
   final OnboardingItem item;
