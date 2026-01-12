@@ -94,37 +94,47 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
                 SizedBox(height: 30),
+
                 Consumer(
                   builder: (context, ref, _) {
                     final selectedIndex = ref.watch(homeTabProvider);
 
-                    List<PostModel> filteredPosts = [];
-
                     if (selectedIndex == 0) {
-                      filteredPosts = allPosts;
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: allPosts.length,
+                        itemBuilder: (context, index) {
+                          return PostCard(post: allPosts[index]);
+                        },
+                      );
+                    } else if (selectedIndex == 1) {
+                      return GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: categories.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 14,
+                              crossAxisSpacing: 14,
+                            ),
+                        itemBuilder: (context, index) {
+                          return CategoryCard(category: categories[index]);
+                        },
+                      );
+                    } else if (selectedIndex == 2) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: allPosts.length, // filter by location here
+                        itemBuilder: (context, index) {
+                          return PostCard(post: allPosts[index]);
+                        },
+                      );
+                    } else {
+                      return SizedBox.shrink();
                     }
-
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: filteredPosts.length,
-                      itemBuilder: (context, index) {
-                        return PostCard(post: filteredPosts[index]);
-                      },
-                    );
-                  },
-                ),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: categories.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 14,
-                    crossAxisSpacing: 14,
-                  ),
-                  itemBuilder: (context, index) {
-                    return CategoryCard(category: categories[index]);
                   },
                 ),
               ],
