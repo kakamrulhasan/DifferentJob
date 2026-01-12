@@ -11,7 +11,10 @@ import 'package:flutter_application_5/presentation/auth/screen/login_screen.dart
 import 'package:flutter_application_5/presentation/auth/screen/login_signup_screen.dart';
 import 'package:flutter_application_5/presentation/auth/screen/set_new_password.dart';
 import 'package:flutter_application_5/presentation/auth/screen/verify_code_screen.dart';
+import 'package:flutter_application_5/presentation/home/view/home_screen.dart';
 import 'package:flutter_application_5/presentation/onboarding/view/onboarding_screen.dart';
 import 'package:flutter_application_5/presentation/splash/view/splash_screen.dart';
+
+import '../../presentation/bottom_nav/view/bottom_nav_bar.dart';
 
 part 'route_config.dart';

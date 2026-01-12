@@ -27,6 +27,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ForgetOptScreen());
       case RouteName.SetNewPassword:
         return MaterialPageRoute(builder: (_) => SetNewPassword());
+        case RouteName.bottomNavigationBar:
+        return MaterialPageRoute(builder: (_) => BottomNavPage ());
+      case RouteName.HomeScreen:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       default:
         return MaterialPageRoute(
           builder: (_) =>

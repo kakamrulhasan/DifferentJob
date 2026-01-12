@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
               CustomButton(
                 text: 'Login',
                 onPressed: () {
-                  Navigator.pushNamed(context, RouteName.VerifyCodeScreen);
+                  Navigator.pushNamed(context, RouteName.bottomNavigationBar);
                 },
               ),
               SizedBox(height: 20),
@@ -138,13 +138,18 @@ class LoginScreen extends StatelessWidget {
                     "Don't have an account? ",
                     style: TextStyle(color: Colors.black, fontSize: 18),
                   ),
-                  const Text(
-                    'SignUp',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: ColorManager.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, RouteName.LoginSignupScreen);
+                    },
+                    child: const Text(
+                      'SignUp',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: ColorManager.primary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

@@ -50,7 +50,7 @@ class _CreateSellerAccountState extends State<CreateSellerAccount> {
                         onPressed: () {
                           setState(() {
                             selectedAccountType = 'seller';
-                          });        
+                          });
                         },
                         type: ButtonType.outlined,
                         borderColor: selectedAccountType == 'seller'
@@ -179,13 +179,21 @@ class _CreateSellerAccountState extends State<CreateSellerAccount> {
                       "Already have an account? ",
                       style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
-                    const Text(
-                      'Sign In',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: ColorManager.primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          RouteName.LoginSignupScreen,
+                        );
+                      },
+                      child: const Text(
+                        'Sign In',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: ColorManager.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

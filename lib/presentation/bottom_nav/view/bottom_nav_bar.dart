@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/color_manager.dart';
+import 'package:flutter_application_5/core/constansts/image_manager.dart';
+import 'package:flutter_application_5/presentation/home/view/home_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../viewmodel/bottom_nav_provider.dart';
+
+class BottomNavPage extends ConsumerWidget {
+  const BottomNavPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedIndex = ref.watch(bottomNavProvider);
+
+    return Scaffold(
+      body: IndexedStack(
+        index: selectedIndex,
+        children: [
+          HomeScreen(),
+          Scaffold(),
+          Scaffold(),
+          Scaffold(),
+          Scaffold(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: ColorManager.primary,
+        unselectedItemColor: ColorManager.black54,
+        backgroundColor: ColorManager.backgroundColor,
+        onTap: (index) {
+          ref.read(bottomNavProvider.notifier).state = index;
+        },
+
+        items: const [
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageManager.home)),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageManager.myads)),
+            label: 'My Ad',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageManager.post)),
+            label: 'Post',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageManager.message)),
+            label: 'Message',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageManager.user)),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
+  }
+}

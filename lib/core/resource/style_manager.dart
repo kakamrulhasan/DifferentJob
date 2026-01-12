@@ -18,3 +18,12 @@ TextStyle getLight300Style12({
 }) {
   return _getTextStyle(fontSize, FontConstants.fontFamily, fontWeight, color);
 }
+
+TextStyle getBoldStyle16({
+  double fontSize = FontSize.s16,
+
+  FontWeight fontWeight = FontWeightManager.bold,
+  required Color color,
+}) {
+  return _getTextStyle(fontSize, FontConstants.fontFamily, fontWeight, color);
+}

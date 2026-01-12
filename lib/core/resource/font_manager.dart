@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FontConstants {
-  static const String fontFamily = "roboto";
+  static const String fontFamily = "SF Pro";
 }
 
 class FontWeightManager {
@@ -10,6 +10,7 @@ class FontWeightManager {
   static const FontWeight medium500 = FontWeight.w500;
   static const FontWeight semiBold600 = FontWeight.w600;
   static const FontWeight bold700 = FontWeight.w700;
+  static const FontWeight bold = FontWeight.bold;
 }
 
 class FontSize {
