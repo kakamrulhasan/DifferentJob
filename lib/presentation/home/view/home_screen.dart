@@ -6,8 +6,10 @@ import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.d
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/models/post_model.dart';
+import '../../../data/sources/category_data.dart';
 import '../../../data/sources/post_data.dart';
 import '../viewmodel/riverpod/home_tab_provider.dart';
+import 'widgets/category_card.dart';
 import 'widgets/post_card.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -100,14 +102,6 @@ class HomeScreen extends ConsumerWidget {
 
                     if (selectedIndex == 0) {
                       filteredPosts = allPosts;
-                    } else if (selectedIndex == 1) {
-                      filteredPosts = allPosts
-                          .where((e) => e.type != 'Job')
-                          .toList();
-                    } else {
-                      filteredPosts = allPosts
-                          .where((e) => e.location.contains('New'))
-                          .toList();
                     }
 
                     return ListView.builder(
@@ -118,6 +112,19 @@ class HomeScreen extends ConsumerWidget {
                         return PostCard(post: filteredPosts[index]);
                       },
                     );
+                  },
+                ),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: categories.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 14,
+                    crossAxisSpacing: 14,
+                  ),
+                  itemBuilder: (context, index) {
+                    return CategoryCard(category: categories[index]);
                   },
                 ),
               ],

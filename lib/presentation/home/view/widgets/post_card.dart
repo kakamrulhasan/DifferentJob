@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/color_manager.dart';
 
 import '../../../../data/models/post_model.dart';
 
@@ -13,7 +14,7 @@ class PostCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorManager.backgroundColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -31,7 +32,6 @@ class PostCard extends StatelessWidget {
           ),
           const SizedBox(width: 12),
 
-          // Content
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,15 +40,17 @@ class PostCard extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
-                        color: Colors.purple.withOpacity(0.1),
+                        color: ColorManager.primary.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
                         post.type,
                         style: const TextStyle(
-                          color: Colors.purple,
+                          color: ColorManager.primary,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -73,10 +75,7 @@ class PostCard extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       '${post.location} · ${post.time}',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 13,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 13),
                     ),
                   ],
                 ),
