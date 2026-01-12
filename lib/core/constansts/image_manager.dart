@@ -14,4 +14,9 @@ class ImageManager {
   static const String post = '$baseUrl/post.png';
   static const String message = '$baseUrl/message.png';
   static const String user = '$baseUrl/user.png';
+  static const String img1 = '$baseUrl/all/img1.png';
+  static const String img2 = '$baseUrl/all/img2.png';
+  static const String img3 = '$baseUrl/all/img3.png';
+  static const String img4 = '$baseUrl/all/img4.png';
+  static const String img5 = '$baseUrl/all/img5.png';
 }

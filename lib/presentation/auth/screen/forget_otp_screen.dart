@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/presentation/auth/widget/primary_button.dart';
+import 'package:flutter_application_5/presentation/widgets/primary_button.dart';
 import '../../../core/constansts/color_manager.dart';
 import '../../../core/resource/app_strings.dart';
 import '../../../core/routes/route_name.dart';

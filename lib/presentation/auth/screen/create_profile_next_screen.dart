@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/presentation/auth/widget/custom_textfield.dart';
 import 'package:flutter_application_5/presentation/auth/widget/experienceInputCard.dart';
-import 'package:flutter_application_5/presentation/auth/widget/primary_button.dart';
+import 'package:flutter_application_5/presentation/widgets/primary_button.dart';
 
 class CreateProfileNextScreen extends StatefulWidget {
   const CreateProfileNextScreen({super.key});

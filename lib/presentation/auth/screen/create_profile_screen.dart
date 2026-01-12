@@ -4,7 +4,7 @@ import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/core/routes/route_name.dart';
 import 'package:flutter_application_5/presentation/auth/widget/custom_textfield.dart';
 import 'package:flutter_application_5/presentation/auth/widget/date_picker.dart';
-import 'package:flutter_application_5/presentation/auth/widget/primary_button.dart';
+import 'package:flutter_application_5/presentation/widgets/primary_button.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({super.key});
