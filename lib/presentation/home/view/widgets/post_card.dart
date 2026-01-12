@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
-
 import '../../../../data/models/post_model.dart';
 
 class PostCard extends StatelessWidget {
@@ -32,10 +31,12 @@ class PostCard extends StatelessWidget {
           ),
           const SizedBox(width: 12),
 
+          // Post Info
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Type Badge + More Icon
                 Row(
                   children: [
                     Container(
@@ -57,10 +58,12 @@ class PostCard extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    const Icon(Icons.more_horiz),
+                    const Icon(Icons.more_horiz, size: 20),
                   ],
                 ),
                 const SizedBox(height: 6),
+
+                // Title
                 Text(
                   post.title,
                   style: const TextStyle(
@@ -69,6 +72,8 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
+
+                // Location + Time
                 Row(
                   children: [
                     const Icon(Icons.location_on, size: 14, color: Colors.grey),
@@ -80,6 +85,8 @@ class PostCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 6),
+
+                // Price
                 Text(
                   post.price,
                   style: const TextStyle(
@@ -95,3 +102,4 @@ class PostCard extends StatelessWidget {
     );
   }
 }
+                   
