@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
 
   final int maxLines;
   final double minHeight;
+   final void Function(String)? onChanged; 
 
   const CustomTextField({
     super.key,
@@ -28,6 +29,7 @@ class CustomTextField extends StatelessWidget {
     this.errorBorderColor = Colors.red,
     this.maxLines = 1,
     this.minHeight = 56,
+     this.onChanged,
   });
 
   @override
@@ -36,6 +38,7 @@ class CustomTextField extends StatelessWidget {
       constraints: BoxConstraints(minHeight: minHeight),
       child: TextField(
         controller: controller,
+         onChanged: onChanged,
         keyboardType: keyboardType,
         obscureText: obscureText,
         maxLines: maxLines,

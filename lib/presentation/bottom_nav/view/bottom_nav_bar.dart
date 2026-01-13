@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/home_screen.dart';
+import 'package:flutter_application_5/presentation/messanger/view/message_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../my_ads/view/my_ad_screen.dart';
+import '../../post/view/post_screen.dart';
 import '../viewmodel/bottom_nav_provider.dart';
 
 class BottomNavPage extends ConsumerWidget {
@@ -18,9 +21,9 @@ class BottomNavPage extends ConsumerWidget {
         index: selectedIndex,
         children: [
           HomeScreen(),
-          Scaffold(),
-          Scaffold(),
-          Scaffold(),
+          MyAdsScreen(),
+          PostScreen(),
+          MessageScreen(),
           Scaffold(),
         ],
       ),

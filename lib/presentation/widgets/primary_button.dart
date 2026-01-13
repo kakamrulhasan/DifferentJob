@@ -8,7 +8,7 @@ enum ButtonType {
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool isLoading;
   final ButtonType type;
 
@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.text,
-    required this.onPressed,
+     this.onPressed,
     this.isLoading = false,
     this.type = ButtonType.filled,
     this.backgroundColor = const Color(0xFF5E17EB),

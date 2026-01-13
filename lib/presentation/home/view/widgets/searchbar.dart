@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/custom_dropdown_button.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/price_range.dart';
-import 'package:flutter_application_5/presentation/home/view/widgets/search_bar_widget.dart';
+import 'package:flutter_application_5/presentation/widgets/search_bar_widget.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/slider.dart';
 import 'package:flutter_application_5/presentation/home/viewmodel/riverpod/dropdown_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
