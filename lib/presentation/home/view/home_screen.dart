@@ -3,11 +3,12 @@ import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/home_tab_item.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.dart';
+import 'package:flutter_application_5/presentation/home/viewmodel/riverpod/services_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/models/post_model.dart';
 import '../../../data/sources/category_data.dart';
 import '../../../data/sources/post_data.dart';
+import '../../../data/sources/services_data.dart';
 import '../viewmodel/riverpod/home_tab_provider.dart';
 import 'widgets/category_card.dart';
 import 'widgets/post_card.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
-
+    final fruits = ['Orange', 'apple', 'banana', 'coconut'];
     return Scaffold(
       backgroundColor: ColorManager.backgroundColor,
       body: SafeArea(
@@ -109,25 +110,51 @@ class HomeScreen extends ConsumerWidget {
                         },
                       );
                     } else if (selectedIndex == 1) {
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: categories.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 14,
-                              crossAxisSpacing: 14,
+                      final categories = ref.watch(categoriesProvider);
+                      final fruitproviders = ref.watch(fruitProvider);
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: categories.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 14,
+                                  crossAxisSpacing: 14,
+                                ),
+                            itemBuilder: (context, index) {
+                              return CategoryCard(category: categories[index]);
+                            },
+                          ),
+                          const SizedBox(height: 32),
+                          const Text(
+                            'All Jobs',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
-                        itemBuilder: (context, index) {
-                          return CategoryCard(category: categories[index]);
-                        },
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: fruitproviders.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(fruitproviders[index]),
+                              );
+                            },
+                          ),
+                        ],
                       );
                     } else if (selectedIndex == 2) {
                       return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: allPosts.length, // filter by location here
+                        itemCount: allPosts.length,
                         itemBuilder: (context, index) {
                           return PostCard(post: allPosts[index]);
                         },
