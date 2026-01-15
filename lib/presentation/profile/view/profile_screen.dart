@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/core/constansts/color_manager.dart';
-import 'package:flutter_application_5/presentation/widgets/post_card.dart';
-import 'package:flutter_application_5/presentation/profile/viewmodel/post_provider.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/constansts/color_manager.dart';
+import '../../widgets/post_card.dart';
+import '../viewmodel/post_provider.dart';
+import 'widgets/info_view.dart';
+import 'widgets/tab_bar.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -11,112 +14,118 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final posts = ref.watch(postProvider);
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: ColorManager.backgroundColor,
-        body: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-              ),
-              child: Container(
-                height: 180,
-                width: double.infinity,
-                color: ColorManager.primary,
-              ),
+    final selectedTab = ref.watch(profileTabProvider);
+    final primaryPurple = ColorManager.primary;
+    return Scaffold(
+      backgroundColor: ColorManager.backgroundColor,
+      body: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Profile',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(''),
-                      Text(''),
-                      Divider(),
-                      Icon(
-                        Icons.person_add_alt_1_outlined,
+            child: Container(
+              height: 180,
+              width: double.infinity,
+              color: ColorManager.primary,
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
+            child: Column(
+              children: [
+                /// HEADER
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Profile',
+                      style: TextStyle(
                         color: Colors.white,
-                      ),
-                      Icon(Icons.settings_outlined, color: Colors.white),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Container(
-                    padding: EdgeInsets.all(0.1),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: ColorManager.backgroundColor,
-                        width: 1,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    child: ClipOval(
-                      child: Image.network(
-                        'https://i.pravatar.cc/300?img=12',
-                        width: 90,
-                        height: 90,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    'John Doe',
-                    style: TextStyle(
-                      color: ColorManager.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    'Austine, Tx',
-                    style: TextStyle(color: ColorManager.black54),
-                  ),
-                  const SizedBox(height: 20),
-                  TabBar(
-                    labelColor: ColorManager.primary,
-                    unselectedLabelColor: ColorManager.black54,
-                    indicatorColor: ColorManager.primary,
-                    indicatorWeight: 2,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    tabs: [
-                      Tab(text: 'Post'),
-                      Tab(text: 'Info'),
-                    ],
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        ListView.builder(
-                          itemCount: posts.length,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 10,
-                          ),
-                          itemBuilder: (context, index) {
-                            return PostCard(post: posts[index]);
-                          },
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.person_add_alt_1_outlined,
+                          color: Colors.white,
                         ),
-                        Center(child: Text('about')),
+                        SizedBox(width: 12),
+                        Icon(Icons.settings_outlined, color: Colors.white),
                       ],
                     ),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+
+                /// AVATAR
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: ColorManager.backgroundColor,
+                      width: 1,
+                    ),
                   ),
-                ],
-              ),
+                  child: ClipOval(
+                    child: Image.network(
+                      'https://i.pravatar.cc/300?img=12',
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                const Text(
+                  'John Doe',
+                  style: TextStyle(
+                    color: ColorManager.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const Text(
+                  'Austine, Tx',
+                  style: TextStyle(color: ColorManager.black54),
+                ),
+
+                const SizedBox(height: 20),
+
+                /// CUSTOM TABS
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      tabItem(ref, "Post", 0, selectedTab, primaryPurple),
+                      tabItem(ref, "Info", 1, selectedTab, primaryPurple),
+                    ],
+                  ),
+                ),
+
+                const Divider(height: 1),
+
+                /// TAB CONTENT
+                Expanded(
+                  child: selectedTab == 0
+                      ? ListView.builder(
+                          padding: const EdgeInsets.all(15),
+                          itemCount: posts.length,
+                          itemBuilder: (context, index) =>
+                              PostCard(post: posts[index]),
+                        )
+                      : const InfoView(),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

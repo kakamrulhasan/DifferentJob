@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data/sources/category_data.dart';
 import '../../../data/sources/post_data.dart';
 import '../../../data/sources/services_data.dart';
+import '../../widgets/search_bar_widget.dart';
 import '../viewmodel/riverpod/home_tab_provider.dart';
 import 'widgets/category_card.dart';
 import '../../widgets/post_card.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
-    
+
     return Scaffold(
       backgroundColor: ColorManager.backgroundColor,
       body: SafeArea(
@@ -44,10 +45,16 @@ class HomeScreen extends ConsumerWidget {
                   ],
                 ),
 
-                searchbar(
-                  searchController: searchController,
-                  category: category,
-                  subCategory: subCategory,
+                CustomSearchBar(
+                  controller: searchController,
+                  onFilterPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (_) => const FilterBottomSheet(),
+                    );
+                  },
                 ),
                 SizedBox(height: 30),
                 Consumer(

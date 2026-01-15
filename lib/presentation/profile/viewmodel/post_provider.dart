@@ -1,6 +1,7 @@
 import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/data/models/post_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class PostNotifier extends Notifier<List<PostModel>> {
   @override
@@ -57,3 +58,5 @@ class PostNotifier extends Notifier<List<PostModel>> {
 final postProvider = NotifierProvider<PostNotifier, List<PostModel>>(
   PostNotifier.new,
 );
+
+final profileTabProvider = StateProvider<int>((ref) => 0);
