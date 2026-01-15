@@ -25,7 +25,6 @@ class MessageState {
   }
 }
 
-// ViewModel Logic using Notifier
 class MessageViewModel extends Notifier<MessageState> {
   @override
   MessageState build() {

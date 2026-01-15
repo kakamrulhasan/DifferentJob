@@ -3,6 +3,7 @@ import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/home_screen.dart';
 import 'package:flutter_application_5/presentation/messanger/view/message_screen.dart';
+import 'package:flutter_application_5/presentation/profile/view/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../my_ads/view/my_ad_screen.dart';
@@ -24,7 +25,7 @@ class BottomNavPage extends ConsumerWidget {
           MyAdsScreen(),
           PostScreen(),
           MessageScreen(),
-          Scaffold(),
+          ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

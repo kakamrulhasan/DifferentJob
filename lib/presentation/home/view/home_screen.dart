@@ -3,7 +3,6 @@ import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/home_tab_item.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.dart';
-import 'package:flutter_application_5/presentation/home/viewmodel/riverpod/services_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/sources/category_data.dart';

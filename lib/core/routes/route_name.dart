@@ -1,5 +1,4 @@
 class RouteName {
-
   static const String splashscreen = '/';
   static const String onBoardingScreen = '/onboarding';
   static const String LoginSignupScreen = '/loginsignup';
@@ -12,8 +11,7 @@ class RouteName {
   static const String ForgotPasswordScreen = '/forgetScreen';
   static const String ForgetOptScreen = '/forgetOTPscreen';
   static const String SetNewPassword = '/setNewPassword';
-  static const String bottomNavigationBar = 'bottomnavBar';
+  static const String bottomNavigationBar = '/bottomnavBar';
 
   static const String HomeScreen = '/homeScreen';
-
 }

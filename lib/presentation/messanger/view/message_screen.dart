@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/presentation/messanger/view/widgets/filter_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -54,7 +55,7 @@ class MessageScreen extends ConsumerWidget {
                           color: Colors.grey,
                         ),
                         filled: true,
-                        fillColor: const Color(0xFFF7F7F9),
+                        fillColor:  ColorManager.backgroundColor,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -69,9 +70,9 @@ class MessageScreen extends ConsumerWidget {
             ),
             // Custom Styled TabBar
             const TabBar(
-              labelColor: Color(0xFF6C63FF),
+              labelColor: ColorManager.primary,
               unselectedLabelColor: Colors.grey,
-              indicatorColor: Color(0xFF6C63FF),
+              indicatorColor: ColorManager.primary,
               indicatorWeight: 3,
               labelStyle: TextStyle(fontWeight: FontWeight.bold),
               tabs: [
@@ -106,7 +107,6 @@ class _MessageListWidget extends StatelessWidget {
           const Divider(height: 1, indent: 85, color: Color(0xFFEEEEEE)),
       itemBuilder: (context, index) {
         final chat = messages[index];
-        // Inside your _MessageListWidget's itemBuilder:
         return ListTile(
           onTap: () {
             Navigator.push(
