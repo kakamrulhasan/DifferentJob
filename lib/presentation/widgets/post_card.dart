@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
-import '../../../../data/models/post_model.dart';
+import '../../data/models/post_model.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({super.key, required this.post});
@@ -11,7 +11,7 @@ class PostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: ColorManager.backgroundColor,
         borderRadius: BorderRadius.circular(16),
@@ -25,7 +25,7 @@ class PostCard extends StatelessWidget {
             child: Image.asset(
               post.image,
               width: 90,
-              height: 90,
+              height: 110,
               fit: BoxFit.cover,
             ),
           ),
@@ -102,4 +102,3 @@ class PostCard extends StatelessWidget {
     );
   }
 }
-                   

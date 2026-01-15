@@ -10,7 +10,7 @@ import '../../../data/sources/post_data.dart';
 import '../../../data/sources/services_data.dart';
 import '../viewmodel/riverpod/home_tab_provider.dart';
 import 'widgets/category_card.dart';
-import 'widgets/post_card.dart';
+import '../../widgets/post_card.dart';
 
 class HomeScreen extends ConsumerWidget {
   HomeScreen({super.key});

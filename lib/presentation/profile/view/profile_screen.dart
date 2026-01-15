@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
-import 'package:flutter_application_5/presentation/home/view/widgets/post_card.dart';
+import 'package:flutter_application_5/presentation/widgets/post_card.dart';
 import 'package:flutter_application_5/presentation/profile/viewmodel/post_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/models/post_model.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
