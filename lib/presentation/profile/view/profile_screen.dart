@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
+import 'package:flutter_application_5/presentation/home/view/widgets/post_card.dart';
+import 'package:flutter_application_5/presentation/profile/viewmodel/post_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../../data/models/post_model.dart';
+
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final posts = ref.watch(postProvider);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -79,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                     style: TextStyle(color: ColorManager.black54),
                   ),
                   const SizedBox(height: 20),
-                  const TabBar(
+                  TabBar(
                     labelColor: ColorManager.primary,
                     unselectedLabelColor: ColorManager.black54,
                     indicatorColor: ColorManager.primary,
@@ -93,12 +99,20 @@ class ProfileScreen extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        Center(child: Text('post')),
+                        ListView.builder(
+                          itemCount: posts.length,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 10,
+                          ),
+                          itemBuilder: (context, index) {
+                            return PostCard(post: posts[index]);
+                          },
+                        ),
                         Center(child: Text('about')),
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),

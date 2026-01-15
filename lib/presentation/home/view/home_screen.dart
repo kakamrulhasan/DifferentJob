@@ -21,7 +21,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
-    final fruits = ['Orange', 'apple', 'banana', 'coconut'];
+    
     return Scaffold(
       backgroundColor: ColorManager.backgroundColor,
       body: SafeArea(
