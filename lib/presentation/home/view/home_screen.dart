@@ -4,11 +4,11 @@ import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/home_tab_item.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../data/sources/category_data.dart';
 import '../../../data/sources/post_data.dart';
-import '../../../data/sources/services_data.dart';
+import '../../post/viewmodel/selected_category_provider.dart';
 import '../../widgets/search_bar_widget.dart';
+import '../viewmodel/all_category_provider.dart';
 import '../viewmodel/home_tab_provider.dart';
 import 'widgets/category_card.dart';
 import '../../widgets/post_card.dart';
@@ -93,8 +93,6 @@ class HomeScreen extends ConsumerWidget {
 
                 SizedBox(height: 30),
 
-                SizedBox(height: 30),
-
                 Consumer(
                   builder: (context, ref, _) {
                     final selectedIndex = ref.watch(homeTabProvider);
@@ -124,7 +122,7 @@ class HomeScreen extends ConsumerWidget {
                       );
                     } else if (selectedIndex == 1) {
                       final categories = ref.watch(categoriesProvider);
-                      final fruitproviders = ref.watch(fruitProvider);
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -137,6 +135,7 @@ class HomeScreen extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 10),
+
                           GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -148,28 +147,45 @@ class HomeScreen extends ConsumerWidget {
                                   crossAxisSpacing: 14,
                                 ),
                             itemBuilder: (context, index) {
-                              return CategoryCard(category: categories[index]);
+                              final isSelected =
+                                  ref.watch(selectedCategoryProvider) == index;
+
+                              return GestureDetector(
+                                onTap: () {
+                                  ref
+                                          .read(
+                                            selectedCategoryProvider.notifier,
+                                          )
+                                          .state =
+                                      index;
+                                },
+                                child: CategoryCard(
+                                  category: categories[index],
+                                  isSelected: isSelected,
+                                ),
+                              );
                             },
                           ),
+
                           const SizedBox(height: 32),
                           const Text(
-                            'All Services',
+                            'All For Sale',
                             style: TextStyle(
                               color: ColorManager.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: fruitproviders.length,
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                title: Text(fruitproviders[index]),
-                              );
-                            },
-                          ),
+                          // ListView.builder(
+                          //   shrinkWrap: true,
+                          //   physics: const NeverScrollableScrollPhysics(),
+                          //   itemCount: allcategory.length,
+                          //   itemBuilder: (context, index) {
+                          //     return ListTile(
+                          //       title: Text(allcategory[index].type),
+                          //     );
+                          //   },
+                          // ),
                         ],
                       );
                     } else if (selectedIndex == 2) {

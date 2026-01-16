@@ -7,8 +7,9 @@ import '../../../post/viewmodel/selected_category_provider.dart';
 
 class CategoryCard extends ConsumerWidget {
   final CategoryModel category;
+  final bool isSelected ;
 
-  const CategoryCard({super.key, required this.category});
+  const CategoryCard({super.key, required this.category, required this.isSelected});
   
 
   @override
