@@ -23,9 +23,9 @@ class HomeTabItem extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: 25,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: isActive ? ColorManager.primary : ColorManager.black12,
+                color: isActive ? ColorManager.primary : ColorManager.black54,
               ),
             ),
             const SizedBox(height: 8),

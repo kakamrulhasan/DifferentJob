@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../viewmodel/riverpod/filter_viewmodel.dart';
+import '../../viewmodel/filter_viewmodel.dart';
 
 class FilterBottomSheet extends ConsumerWidget {
   const FilterBottomSheet({super.key});

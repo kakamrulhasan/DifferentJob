@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../presentation/home/viewmodel/riverpod/dropdown_provider.dart';
+import '../../presentation/post/viewmodel/selected_category_provider.dart';
 import '../sources/services_data.dart';
 
 final categoryListProvider = Provider<List<String>>((ref) {

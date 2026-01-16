@@ -9,7 +9,7 @@ import '../../../data/sources/category_data.dart';
 import '../../../data/sources/post_data.dart';
 import '../../../data/sources/services_data.dart';
 import '../../widgets/search_bar_widget.dart';
-import '../viewmodel/riverpod/home_tab_provider.dart';
+import '../viewmodel/home_tab_provider.dart';
 import 'widgets/category_card.dart';
 import '../../widgets/post_card.dart';
 
@@ -92,14 +92,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
 
                 SizedBox(height: 30),
-                Text(
-                  'Recent Posts',
-                  style: TextStyle(
-                    color: ColorManager.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+
                 SizedBox(height: 30),
 
                 Consumer(
@@ -107,13 +100,27 @@ class HomeScreen extends ConsumerWidget {
                     final selectedIndex = ref.watch(homeTabProvider);
 
                     if (selectedIndex == 0) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: allPosts.length,
-                        itemBuilder: (context, index) {
-                          return PostCard(post: allPosts[index]);
-                        },
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Recent Posts',
+                            style: TextStyle(
+                              color: ColorManager.black,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: allPosts.length,
+                            itemBuilder: (context, index) {
+                              return PostCard(post: allPosts[index]);
+                            },
+                          ),
+                        ],
                       );
                     } else if (selectedIndex == 1) {
                       final categories = ref.watch(categoriesProvider);
@@ -121,6 +128,15 @@ class HomeScreen extends ConsumerWidget {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            'Browser by Category',
+                            style: TextStyle(
+                              color: ColorManager.black,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
                           GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -137,9 +153,9 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 32),
                           const Text(
-                            'All Jobs',
+                            'All Services',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: ColorManager.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),

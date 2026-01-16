@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/data/models/category_model.dart';
-import 'package:flutter_application_5/presentation/home/viewmodel/riverpod/selected_category_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../post/viewmodel/selected_category_provider.dart';
 
 class CategoryCard extends ConsumerWidget {
   final CategoryModel category;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
-import 'package:flutter_application_5/presentation/home/viewmodel/riverpod/search_query_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/constansts/image_manager.dart';
+import '../home/viewmodel/search_query_provider.dart';
 
 class CustomSearchBar extends ConsumerWidget {
   const CustomSearchBar({
