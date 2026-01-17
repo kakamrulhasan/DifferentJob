@@ -3,24 +3,33 @@ import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/home_tab_item.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.dart';
+import 'package:flutter_application_5/presentation/home/viewmodel/selected_category_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data/sources/category_data.dart';
 import '../../../data/sources/post_data.dart';
-import '../../post/viewmodel/selected_category_provider.dart';
 import '../../widgets/search_bar_widget.dart';
-import '../viewmodel/all_category_provider.dart';
 import '../viewmodel/home_tab_provider.dart';
-import 'widgets/category_card.dart';
 import '../../widgets/post_card.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   HomeScreen({super.key});
 
-  final List<String> category = ['services', 'job', 'for sale'];
-  final List<String> subCategory = ['Automotive Services', 'AI tools'];
-  final List<String> title = ['All', 'Category', 'Location'];
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final Map<int, List<String>> categoryWiseItems = {
+    0: ['Automotive Services','Beauty','Pet Services','Skilled Trade Services','Small Business Ads','Labor, Hauling & Moving','Household Services'], // Services
+    1: ['Accounting/Finance','Design/Development','Landingscaping/Groundskeeping','Construction','Demolition','Mover/Moving','Junk Removal Specialist','Hauling Services','Yard Cleaning/Brush Cleaning','Fence Installation/Repair'], // Job
+    2: ['Antiques','Arts & Crafts','Books & Magazines','Furniture','Auto Parts','Auto Wheels & Tires','Aviation','Baby & Kid stuff'], // For Sale
+    3: ['Delivery Help', 'Event Support'], // Gigs
+    4: ['Need Tutor', 'Need Cleaner'], // Help
+    5: ['Community Meetup', 'Volunteer Work'], // Community
+  };
+
+  @override
+  Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
 
     return Scaffold(
@@ -98,43 +107,31 @@ class HomeScreen extends ConsumerWidget {
                     final selectedIndex = ref.watch(homeTabProvider);
 
                     if (selectedIndex == 0) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Recent Posts',
-                            style: TextStyle(
-                              color: ColorManager.black,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: allPosts.length,
-                            itemBuilder: (context, index) {
-                              return PostCard(post: allPosts[index]);
-                            },
-                          ),
-                        ],
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: allPosts.length,
+                        itemBuilder: (context, index) {
+                          return PostCard(post: allPosts[index]);
+                        },
                       );
                     } else if (selectedIndex == 1) {
                       final categories = ref.watch(categoriesProvider);
+                      final selectedCategoryIndex = ref.watch(
+                        selectedCategoryProvider,
+                      );
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Browser by Category',
                             style: TextStyle(
-                              color: ColorManager.black,
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
 
                           GridView.builder(
                             shrinkWrap: true,
@@ -147,8 +144,7 @@ class HomeScreen extends ConsumerWidget {
                                   crossAxisSpacing: 14,
                                 ),
                             itemBuilder: (context, index) {
-                              final isSelected =
-                                  ref.watch(selectedCategoryProvider) == index;
+                              final isSelected = selectedCategoryIndex == index;
 
                               return GestureDetector(
                                 onTap: () {
@@ -159,33 +155,86 @@ class HomeScreen extends ConsumerWidget {
                                           .state =
                                       index;
                                 },
-                                child: CategoryCard(
-                                  category: categories[index],
-                                  isSelected: isSelected,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? ColorManager.primary
+                                          : Colors.grey,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        categories[index].icon,
+                                        color: isSelected
+                                            ? ColorManager.primary
+                                            : ColorManager.black54,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(categories[index].title),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
                           ),
 
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 24),
                           const Text(
-                            'All For Sale',
+                            'All Categories',
                             style: TextStyle(
                               color: ColorManager.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          // ListView.builder(
-                          //   shrinkWrap: true,
-                          //   physics: const NeverScrollableScrollPhysics(),
-                          //   itemCount: allcategory.length,
-                          //   itemBuilder: (context, index) {
-                          //     return ListTile(
-                          //       title: Text(allcategory[index].type),
-                          //     );
-                          //   },
-                          // ),
+                          if (selectedCategoryIndex != -1 &&
+                              categoryWiseItems.containsKey(
+                                selectedCategoryIndex,
+                              ))
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount:
+                                  categoryWiseItems[selectedCategoryIndex]!
+                                      .length,
+                              itemBuilder: (context, index) {
+                                final item =
+                                    categoryWiseItems[selectedCategoryIndex]![index];
+                                final selectedIndex = ref.watch(
+                                  selectedListItemProvider,
+                                );
+                                final isSelected = selectedIndex == index;
+
+                                return InkWell(
+                                  onTap: () {
+                                    ref
+                                            .read(
+                                              selectedListItemProvider.notifier,
+                                            )
+                                            .state =
+                                        index;
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      border: Border.all(
+                                        color: isSelected
+                                            ? ColorManager.primary
+                                            : ColorManager.black12,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: ListTile(title: Text(item)),
+                                  ),
+                                );
+                              },
+                            ),
                         ],
                       );
                     } else if (selectedIndex == 2) {
@@ -197,9 +246,9 @@ class HomeScreen extends ConsumerWidget {
                           return PostCard(post: allPosts[index]);
                         },
                       );
-                    } else {
-                      return SizedBox.shrink();
                     }
+
+                    return const SizedBox.shrink();
                   },
                 ),
               ],

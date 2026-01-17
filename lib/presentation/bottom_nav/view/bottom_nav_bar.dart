@@ -7,7 +7,7 @@ import 'package:flutter_application_5/presentation/profile/view/profile_screen.d
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../my_ads/view/my_ad_screen.dart';
-import '../../post/view/post_screen.dart';
+import '../../post/view/screen/post_screen.dart';
 import '../viewmodel/bottom_nav_provider.dart';
 
 class BottomNavPage extends ConsumerWidget {
