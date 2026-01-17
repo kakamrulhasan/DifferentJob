@@ -153,11 +153,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Browser by Category',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                            style: AppTextStyles.getBold700Style24(
+                              color: Colors.black,
                             ),
                           ),
                           const SizedBox(height: 10),
