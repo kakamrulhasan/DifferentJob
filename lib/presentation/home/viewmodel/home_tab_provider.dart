@@ -1,3 +1,3 @@
 import 'package:flutter_riverpod/legacy.dart';
 
-final homeTabProvider = StateProvider<int>((ref)=> 0);
+final homeTabProvider = StateProvider.autoDispose<int>((ref)=> 0);

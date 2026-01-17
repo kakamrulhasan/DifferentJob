@@ -5,6 +5,7 @@ import 'package:flutter_application_5/presentation/home/view/widgets/home_tab_it
 import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.dart';
 import 'package:flutter_application_5/presentation/home/viewmodel/selected_category_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/resource/style_manager.dart';
 import '../../../data/sources/category_data.dart';
 import '../../../data/sources/post_data.dart';
 import '../../widgets/search_bar_widget.dart';
@@ -20,9 +21,37 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   final Map<int, List<String>> categoryWiseItems = {
-    0: ['Automotive Services','Beauty','Pet Services','Skilled Trade Services','Small Business Ads','Labor, Hauling & Moving','Household Services'], // Services
-    1: ['Accounting/Finance','Design/Development','Landingscaping/Groundskeeping','Construction','Demolition','Mover/Moving','Junk Removal Specialist','Hauling Services','Yard Cleaning/Brush Cleaning','Fence Installation/Repair'], // Job
-    2: ['Antiques','Arts & Crafts','Books & Magazines','Furniture','Auto Parts','Auto Wheels & Tires','Aviation','Baby & Kid stuff'], // For Sale
+    0: [
+      'Automotive Services',
+      'Beauty',
+      'Pet Services',
+      'Skilled Trade Services',
+      'Small Business Ads',
+      'Labor, Hauling & Moving',
+      'Household Services',
+    ], // Services
+    1: [
+      'Accounting/Finance',
+      'Design/Development',
+      'Landingscaping/Groundskeeping',
+      'Construction',
+      'Demolition',
+      'Mover/Moving',
+      'Junk Removal Specialist',
+      'Hauling Services',
+      'Yard Cleaning/Brush Cleaning',
+      'Fence Installation/Repair',
+    ], // Job
+    2: [
+      'Antiques',
+      'Arts & Crafts',
+      'Books & Magazines',
+      'Furniture',
+      'Auto Parts',
+      'Auto Wheels & Tires',
+      'Aviation',
+      'Baby & Kid stuff',
+    ], // For Sale
     3: ['Delivery Help', 'Event Support'], // Gigs
     4: ['Need Tutor', 'Need Cleaner'], // Help
     5: ['Community Meetup', 'Volunteer Work'], // Community
@@ -238,13 +267,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ],
                       );
                     } else if (selectedIndex == 2) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: allPosts.length,
-                        itemBuilder: (context, index) {
-                          return PostCard(post: allPosts[index]);
-                        },
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Filter by Location',
+                            style: AppTextStyles.getBold700Style24(
+                              color: ColorManager.black,
+                            ),
+                          ),
+
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: allPosts.length,
+                            itemBuilder: (context, index) {
+                              return PostCard(post: allPosts[index]);
+                            },
+                          ),
+                        ],
                       );
                     }
 

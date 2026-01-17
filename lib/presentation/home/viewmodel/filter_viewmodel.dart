@@ -17,7 +17,6 @@ class FilterViewModel extends StateNotifier<FilterState> {
   }
 }
 
-// The Provider
 final filterProvider = StateNotifierProvider<FilterViewModel, FilterState>((ref) {
   return FilterViewModel();
 });

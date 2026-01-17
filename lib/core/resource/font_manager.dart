@@ -5,6 +5,7 @@ class FontConstants {
 }
 
 class FontWeightManager {
+  static const FontWeight bold = FontWeight.bold;
   static const FontWeight light300 = FontWeight.w300;
   static const FontWeight regural400 = FontWeight.w400;
   static const FontWeight medium500 = FontWeight.w500;
@@ -19,4 +20,5 @@ class FontSize {
   static const double s17 = 17.0;
   static const double s18 = 18.0;
   static const double s20 = 20.0;
+  static const double s24 = 24.0;
 }

@@ -1,3 +1,3 @@
 import 'package:riverpod/legacy.dart';
 
-final selectedCategoryProvider = StateProvider<int?>((ref) => null);
+final selectedCategoryProvider = StateProvider.autoDispose<int?>((ref) => null);
