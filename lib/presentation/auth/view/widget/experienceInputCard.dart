@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/constansts/color_manager.dart';
+import '../../../../core/constansts/color_manager.dart';
 
 class ExperienceInputCard extends StatefulWidget {
   final List<String> items;

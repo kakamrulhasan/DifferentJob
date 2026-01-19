@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 
-import '../../../core/constansts/color_manager.dart';
+import '../../../../core/constansts/color_manager.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});

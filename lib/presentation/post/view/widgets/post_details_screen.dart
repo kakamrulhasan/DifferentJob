@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constansts/color_manager.dart';
 import '../../../../data/models/category_model.dart';
-import '../../../auth/widget/custom_textfield.dart';
+import '../../../auth/view/widget/custom_textfield.dart';
 import '../../../widgets/primary_button.dart';
 import '../../viewmodel/checkbox_provider.dart';
 import '../../viewmodel/image_picker_provider.dart';
