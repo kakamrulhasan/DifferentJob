@@ -26,64 +26,60 @@ class SettingsScreen extends StatelessWidget {
                       bottomRight: Radius.circular(24),
                     ),
                   ),
-                  child: SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              return Navigator.pop(context);
-                            },
-                          ),
-                          const Text(
-                            'Settings',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const Icon(
-                            Icons.person_outline,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 60,
+                      left: 16,
+                      right: 16,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios,
                             color: Colors.white,
-                            size: 26,
+                            size: 20,
                           ),
-                        ],
-                      ),
+                          onPressed: () {
+                            return Navigator.pop(context);
+                          },
+                        ),
+                        const Text(
+                          'Settings',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.person_add_alt_1_outlined,
+                          color: Colors.white,
+                          size: 26,
+                        ),
+                      ],
                     ),
                   ),
                 ),
 
-                // Profile Picture Overlay
                 Positioned(
                   bottom: -45,
                   child: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 4),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
+                      border: Border.all(
+                        color: ColorManager.backgroundColor,
+                        width: 4,
+                      ),
                     ),
-                    child: const CircleAvatar(
-                      radius: 45,
-                      backgroundImage: NetworkImage(
+                    child: ClipOval(
+                      child: Image.network(
                         'https://i.pravatar.cc/300?img=12',
+                        width: 90,
+                        height: 90,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -93,35 +89,33 @@ class SettingsScreen extends StatelessWidget {
 
             const SizedBox(height: 55),
 
-            /// 2. NAME & LOCATION
             const Text(
               'John Doe',
               style: TextStyle(
-                fontSize: 20,
+                color: ColorManager.black,
                 fontWeight: FontWeight.bold,
-                color: ColorManager.secondary,
+                fontSize: 18,
               ),
             ),
             const SizedBox(height: 4),
             const Text(
               'Austin, TX',
-              style: TextStyle(fontSize: 14, color: ColorManager.secondary),
+              style: TextStyle(color: ColorManager.black54),
             ),
 
             const SizedBox(height: 30),
 
-            /// 3. SETTINGS LIST
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  _settingsTile(Icons.settings_outlined, 'General Settings'),
-                  _settingsTile(
+                  _settingsCard(Icons.settings_outlined, 'General Settings'),
+                  _settingsCard(
                     Icons.notifications_none,
                     'Notifications Settings',
                   ),
-                  _settingsTile(Icons.person_outline, 'Accounts Settings'),
-                  _settingsTile(
+                  _settingsCard(Icons.person_outline, 'Accounts Settings'),
+                  _settingsCard(
                     Icons.explore_outlined,
                     'Location GPS',
                     trailing: Switch(
@@ -130,10 +124,15 @@ class SettingsScreen extends StatelessWidget {
                       activeColor: ColorManager.primary,
                     ),
                   ),
-                  _settingsTile(Icons.shield_outlined, 'Security Settings'),
-                  _settingsTile(Icons.lock_outline, 'Privacy Policy'),
-                  _settingsTile(Icons.style_outlined, 'About Local'),
-                  _settingsTile(Icons.logout, 'Log Out', isLogout: true),
+                  _settingsCard(Icons.shield_outlined, 'Security Settings'),
+                  _settingsCard(Icons.lock_outline, 'Privacy Policy'),
+                  _settingsCard(Icons.sell_outlined, 'About Local'),
+                  _settingsCard(
+                    Icons.logout,
+                    'Log Out',
+                    textColor: Colors.red,
+                    iconColor: Colors.red,
+                  ),
                 ],
               ),
             ),
@@ -141,15 +140,41 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
       ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: ColorManager.primary,
+        unselectedItemColor: Colors.grey,
+        currentIndex: 4, // "Profile" selected
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_outlined),
+            label: 'My Ad',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle_outline),
+            label: 'Post',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline),
+            label: 'Message',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
     );
   }
 
-  /// Helper widget for the setting cards
-  Widget _settingsTile(
+  Widget _settingsCard(
     IconData icon,
     String title, {
     Widget? trailing,
-    bool isLogout = false,
+    Color? textColor,
+    Color? iconColor,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -159,11 +184,11 @@ class SettingsScreen extends StatelessWidget {
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: ListTile(
-        leading: Icon(icon, color: isLogout ? Colors.red : Colors.grey[600]),
+        leading: Icon(icon, color: iconColor ?? Colors.grey[600]),
         title: Text(
           title,
           style: TextStyle(
-            color: isLogout ? Colors.red : ColorManager.secondary,
+            color: textColor ?? ColorManager.black,
             fontSize: 15,
             fontWeight: FontWeight.w500,
           ),

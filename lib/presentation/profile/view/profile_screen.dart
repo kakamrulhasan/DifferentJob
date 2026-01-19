@@ -14,7 +14,6 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isEditing = ref.watch(profileEditModeProvider);
-    final isSetting = ref.watch(profileSettingsModeProvider);
     final posts = ref.watch(postProvider);
     final selectedTab = ref.watch(profileTabProvider);
     final primaryPurple = ColorManager.primary;
