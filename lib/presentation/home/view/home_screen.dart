@@ -24,7 +24,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final gridIndex = ref.watch(selectedGridProvider);
     final selectedGrid = gridIndex == -1 ? null : gridCategories[gridIndex];
-    final subList = selectedGrid == null ? [] : subCategories[selectedGrid.title]!;
+    final subList = selectedGrid == null
+        ? []
+        : subCategories[selectedGrid.title]!;
 
     final searchController = TextEditingController();
     final selectedTab = ref.watch(homeTabProvider);
@@ -140,6 +142,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               return GestureDetector(
                                 onTap: () {
                                   ref
+                                      .read(
+                                        selectedCategoryNameProvider.notifier,
+                                      )
+                                      .state = gridCategories[index]
+                                      .title;
+                                  ref
                                       .read(selectedGridProvider.notifier)
                                       .state = isSelected
                                       ? -1
@@ -175,14 +183,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ),
 
                           const SizedBox(height: 24),
-                          const Text(
-                            'All Subcategories',
-                            style: TextStyle(
-                              color: ColorManager.black54,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                          if (gridIndex != -1) ...[
+                            Text(
+                              'All ${selectedGrid!.title}',
+                              style: const TextStyle(
+                                color: ColorManager.black54,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
+                          ],
+
                           const SizedBox(height: 10),
 
                           // Subcategories List

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/color_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../viewmodel/all_category_provider.dart';
+import '../../viewmodel/categories_provider.dart';
 import 'home_details_screen.dart'; // We will create this next
 
-class HomeSublist extends StatelessWidget {
+class HomeSublist extends ConsumerWidget {
   final String subCategory;
 
   const HomeSublist({super.key, required this.subCategory});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final categoryName = ref.watch(selectedCategoryNameProvider);
     final items = postsBySubCategory[subCategory] ?? [];
 
     return Scaffold(
@@ -20,15 +24,20 @@ class HomeSublist extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
-          subCategory,
-          style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        title: Center(
+          child: Text(
+            categoryName.isEmpty ? 'Details' : categoryName,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Colors.black),
             onPressed: () {},
-          )
+          ),
         ],
       ),
       body: Column(
@@ -47,25 +56,26 @@ class HomeSublist extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               itemBuilder: (context, index) {
                 final item = items[index];
-                // Check if it's the first item to show the purple border like the image
-                bool isSelected = index == 0; 
+                bool isSelected = index == 0;
 
-                return GestureDetector(
+                return InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => GigDetailScreen(item: item),
+                        builder: (context) => HomeDetailsScreen(item: item),
                       ),
                     );
                   },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: ColorManager.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: isSelected ? const Color(0xFF6C40FE) : Colors.grey.shade200,
+                        color: isSelected
+                            ? ColorManager.primary
+                            : ColorManager.black10,
                         width: isSelected ? 1.5 : 1,
                       ),
                     ),
@@ -91,7 +101,8 @@ class HomeSublist extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       subCategory,
@@ -101,7 +112,10 @@ class HomeSublist extends StatelessWidget {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    const Icon(Icons.more_horiz, color: Colors.grey),
+                                    const Icon(
+                                      Icons.more_horiz,
+                                      color: Colors.grey,
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 4),
@@ -115,11 +129,18 @@ class HomeSublist extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 Row(
                                   children: [
-                                    const Icon(Icons.location_on_outlined, size: 14, color: Colors.grey),
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      size: 14,
+                                      color: Colors.grey,
+                                    ),
                                     const SizedBox(width: 4),
                                     Text(
                                       "Austin, TX . 1h ago", // Static for now
-                                      style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+                                      style: TextStyle(
+                                        color: Colors.grey.shade600,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -142,18 +163,6 @@ class HomeSublist extends StatelessWidget {
               },
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF6C40FE),
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'My Ad'),
-          BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: 'Post'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: 'Message'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
         ],
       ),
     );

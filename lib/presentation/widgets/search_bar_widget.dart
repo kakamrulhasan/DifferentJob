@@ -16,36 +16,39 @@ class CustomSearchBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext, WidgetRef ref) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            height: 56,
-            decoration: BoxDecoration(
-              color: ColorManager.black10,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: TextField(
-              controller: controller,
-              style: const TextStyle(fontSize: 18),
-              onChanged: (value) {
-                ref.read(searchProvider.notifier).state = value;
-              },
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyle(fontSize: 18),
-                prefixIcon: Icon(Icons.search, size: 28),
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(vertical: 16),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              height: 56,
+              decoration: BoxDecoration(
+                color: ColorManager.black10,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: TextField(
+                controller: controller,
+                style: const TextStyle(fontSize: 18),
+                onChanged: (value) {
+                  ref.read(searchProvider.notifier).state = value;
+                },
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyle(fontSize: 18),
+                  prefixIcon: Icon(Icons.search, size: 28),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(vertical: 16),
+                ),
               ),
             ),
           ),
-        ),
-        IconButton(
-          onPressed: onFilterPressed,
-          icon: Image.asset(ImageManager.filter, height: 60, width: 60),
-        ),
-      ],
+          IconButton(
+            onPressed: onFilterPressed,
+            icon: Image.asset(ImageManager.filter, height: 60, width: 60),
+          ),
+        ],
+      ),
     );
   }
 }
