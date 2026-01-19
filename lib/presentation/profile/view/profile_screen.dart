@@ -91,11 +91,21 @@ class ProfileScreen extends ConsumerWidget {
 
                 const SizedBox(height: 10),
 
-                /// AVATAR & NAME
-                const CircleAvatar(
-                  radius: 45,
-                  backgroundImage: NetworkImage(
-                    'https://i.pravatar.cc/300?img=12',
+                Positioned(
+                  bottom: -45,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: ColorManager.white, width: 2),
+                    ),
+                    child: ClipOval(
+                      child: Image.network(
+                        'https://i.pravatar.cc/300?img=12',
+                        width: 90,
+                        height: 90,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8),

@@ -70,8 +70,8 @@ class SettingsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: ColorManager.backgroundColor,
-                        width: 4,
+                        color: ColorManager.white,
+                        width: 2,
                       ),
                     ),
                     child: ClipOval(
