@@ -1,16 +1,20 @@
-class CategoryAllServices {
-  final String? image;
-  final String type;
-  final String? title;
-  final String? location;
-  final String? time;
-  final String? price;
-  CategoryAllServices({
-    this.image,
-    required this.type,
-    this.title,
-    this.location,
-    this.time,
-    this.price,
+import 'package:flutter/widgets.dart';
+
+class ItemDetail {
+  final String title;
+  final String description;
+  final String price;
+  final String image;
+  ItemDetail({
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.image,
   });
+}
+class GridCategory {
+  final String title;
+  final IconData icon;
+
+  GridCategory({required this.title, required this.icon});
 }

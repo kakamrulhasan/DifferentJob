@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/home_tab_item.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.dart';
-import 'package:flutter_application_5/presentation/home/viewmodel/selected_category_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/resource/style_manager.dart';
-import '../../../data/sources/category_data.dart';
+import 'package:flutter_application_5/presentation/home/viewmodel/home_tab_provider.dart';
 import '../../../data/sources/post_data.dart';
-import '../../widgets/search_bar_widget.dart';
-import '../viewmodel/home_tab_provider.dart';
 import '../../widgets/post_card.dart';
+import '../../widgets/search_bar_widget.dart';
+import '../viewmodel/all_category_provider.dart';
+import '../viewmodel/categories_provider.dart';
+import 'widgets/home_sublist.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   HomeScreen({super.key});
@@ -20,151 +20,115 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  final Map<int, List<String>> categoryWiseItems = {
-    0: [
-      'Automotive Services',
-      'Beauty',
-      'Pet Services',
-      'Skilled Trade Services',
-      'Small Business Ads',
-      'Labor, Hauling & Moving',
-      'Household Services',
-    ], // Services
-    1: [
-      'Accounting/Finance',
-      'Design/Development',
-      'Landingscaping/Groundskeeping',
-      'Construction',
-      'Demolition',
-      'Mover/Moving',
-      'Junk Removal Specialist',
-      'Hauling Services',
-      'Yard Cleaning/Brush Cleaning',
-      'Fence Installation/Repair',
-    ], // Job
-    2: [
-      'Antiques',
-      'Arts & Crafts',
-      'Books & Magazines',
-      'Furniture',
-      'Auto Parts',
-      'Auto Wheels & Tires',
-      'Aviation',
-      'Baby & Kid stuff',
-    ], // For Sale
-    3: ['Delivery Help', 'Event Support'], // Gigs
-    4: ['Need Tutor', 'Need Cleaner'], // Help
-    5: ['Community Meetup', 'Volunteer Work'], // Community
-  };
-
   @override
   Widget build(BuildContext context) {
-    TextEditingController searchController = TextEditingController();
+    final gridIndex = ref.watch(selectedGridProvider);
+    final selectedGrid = gridIndex == -1 ? null : gridCategories[gridIndex];
+    final subList = selectedGrid == null ? [] : subCategories[selectedGrid.title]!;
+
+    final searchController = TextEditingController();
+    final selectedTab = ref.watch(homeTabProvider);
 
     return Scaffold(
       backgroundColor: ColorManager.backgroundColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 12, left: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          children: [
+            // Logo + notification
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    ImageManager.logo,
+                    width: 123,
+                    height: 123,
+                    color: ColorManager.primary,
+                  ),
+                  const Icon(Icons.notifications_none_outlined, size: 34),
+                ],
+              ),
+            ),
+
+            // Search Bar
+            CustomSearchBar(
+              controller: searchController,
+              onFilterPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (_) => const FilterBottomSheet(),
+                );
+              },
+            ),
+
+            // Tabs
+            Consumer(
+              builder: (context, ref, _) {
+                final selectedIndex = ref.watch(homeTabProvider);
+                return Column(
                   children: [
-                    Image.asset(
-                      ImageManager.logo,
-                      width: 123,
-                      height: 123,
-                      color: ColorManager.primary,
-                    ),
-                    const Icon(Icons.notifications_none_outlined, size: 34),
-                  ],
-                ),
-
-                CustomSearchBar(
-                  controller: searchController,
-                  onFilterPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (_) => const FilterBottomSheet(),
-                    );
-                  },
-                ),
-                SizedBox(height: 30),
-                Consumer(
-                  builder: (context, ref, _) {
-                    final selectedIndex = ref.watch(homeTabProvider);
-
-                    return Column(
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            HomeTabItem(
-                              title: 'All',
-                              isActive: selectedIndex == 0,
-                              onTap: () =>
-                                  ref.read(homeTabProvider.notifier).state = 0,
-                            ),
-                            HomeTabItem(
-                              title: 'Category',
-                              isActive: selectedIndex == 1,
-                              onTap: () =>
-                                  ref.read(homeTabProvider.notifier).state = 1,
-                            ),
-                            HomeTabItem(
-                              title: 'Location',
-                              isActive: selectedIndex == 2,
-                              onTap: () =>
-                                  ref.read(homeTabProvider.notifier).state = 2,
-                            ),
-                          ],
+                        HomeTabItem(
+                          title: 'All',
+                          isActive: selectedIndex == 0,
+                          onTap: () =>
+                              ref.read(homeTabProvider.notifier).state = 0,
                         ),
-                        const Divider(height: 1),
+                        HomeTabItem(
+                          title: 'Category',
+                          isActive: selectedIndex == 1,
+                          onTap: () =>
+                              ref.read(homeTabProvider.notifier).state = 1,
+                        ),
+                        HomeTabItem(
+                          title: 'Location',
+                          isActive: selectedIndex == 2,
+                          onTap: () =>
+                              ref.read(homeTabProvider.notifier).state = 2,
+                        ),
                       ],
-                    );
-                  },
-                ),
+                    ),
+                    const Divider(height: 1),
+                  ],
+                );
+              },
+            ),
 
-                SizedBox(height: 30),
-
-                Consumer(
-                  builder: (context, ref, _) {
-                    final selectedIndex = ref.watch(homeTabProvider);
-
-                    if (selectedIndex == 0) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: allPosts.length,
-                        itemBuilder: (context, index) {
-                          return PostCard(post: allPosts[index]);
-                        },
-                      );
-                    } else if (selectedIndex == 1) {
-                      final categories = ref.watch(categoriesProvider);
-                      final selectedCategoryIndex = ref.watch(
-                        selectedCategoryProvider,
-                      );
-
-                      return Column(
+            // Body
+            Expanded(
+              child: selectedTab == 0
+                  ? ListView.builder(
+                      padding: const EdgeInsets.all(12),
+                      itemCount: allPosts.length,
+                      itemBuilder: (context, index) {
+                        return PostCard(post: allPosts[index]);
+                      },
+                    )
+                  : selectedTab == 1
+                  ? SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Browser by Category',
-                            style: AppTextStyles.getBold700Style24(
-                              color: Colors.black,
+                          const SizedBox(height: 16),
+                          const Text(
+                            'Browse by Category',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 10),
 
+                          // Grid Categories
                           GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: categories.length,
+                            itemCount: gridCategories.length,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
@@ -172,16 +136,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   crossAxisSpacing: 14,
                                 ),
                             itemBuilder: (context, index) {
-                              final isSelected = selectedCategoryIndex == index;
-
+                              final isSelected = gridIndex == index;
                               return GestureDetector(
                                 onTap: () {
                                   ref
-                                          .read(
-                                            selectedCategoryProvider.notifier,
-                                          )
-                                          .state =
-                                      index;
+                                      .read(selectedGridProvider.notifier)
+                                      .state = isSelected
+                                      ? -1
+                                      : index;
+                                  ref.read(selectedSubProvider.notifier).state =
+                                      -1;
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -196,13 +160,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
-                                        categories[index].icon,
+                                        gridCategories[index].icon,
                                         color: isSelected
                                             ? ColorManager.primary
                                             : ColorManager.black54,
                                       ),
                                       const SizedBox(height: 8),
-                                      Text(categories[index].title),
+                                      Text(gridCategories[index].title),
                                     ],
                                   ),
                                 ),
@@ -212,88 +176,75 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                           const SizedBox(height: 24),
                           const Text(
-                            'All Categories',
+                            'All Subcategories',
                             style: TextStyle(
                               color: ColorManager.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          if (selectedCategoryIndex != -1 &&
-                              categoryWiseItems.containsKey(
-                                selectedCategoryIndex,
-                              ))
+                          const SizedBox(height: 10),
+
+                          // Subcategories List
+                          if (gridIndex != -1)
                             ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount:
-                                  categoryWiseItems[selectedCategoryIndex]!
-                                      .length,
+                              itemCount: subList.length,
                               itemBuilder: (context, index) {
-                                final item =
-                                    categoryWiseItems[selectedCategoryIndex]![index];
                                 final selectedIndex = ref.watch(
-                                  selectedListItemProvider,
+                                  selectedSubProvider,
                                 );
                                 final isSelected = selectedIndex == index;
 
                                 return InkWell(
                                   onTap: () {
                                     ref
-                                            .read(
-                                              selectedListItemProvider.notifier,
-                                            )
+                                            .read(selectedSubProvider.notifier)
                                             .state =
                                         index;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => HomeSublist(
+                                          subCategory: subList[index],
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: Container(
-                                    margin: EdgeInsets.all(3),
+                                    margin: const EdgeInsets.symmetric(
+                                      vertical: 4,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
                                         color: isSelected
                                             ? ColorManager.primary
                                             : ColorManager.black12,
                                         width: 1,
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.transparent,
                                     ),
-                                    child: ListTile(title: Text(item)),
+                                    child: ListTile(
+                                      title: Text(subList[index]),
+                                    ),
                                   ),
                                 );
                               },
                             ),
                         ],
-                      );
-                    } else if (selectedIndex == 2) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Filter by Location',
-                            style: AppTextStyles.getBold700Style24(
-                              color: ColorManager.black,
-                            ),
-                          ),
-
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: allPosts.length,
-                            itemBuilder: (context, index) {
-                              return PostCard(post: allPosts[index]);
-                            },
-                          ),
-                        ],
-                      );
-                    }
-
-                    return const SizedBox.shrink();
-                  },
-                ),
-              ],
+                      ),
+                    )
+                  : ListView.builder(
+                      padding: const EdgeInsets.all(12),
+                      itemCount: allPosts.length,
+                      itemBuilder: (context, index) {
+                        return PostCard(post: allPosts[index]);
+                      },
+                    ),
             ),
-          ),
+          ],
         ),
       ),
     );
