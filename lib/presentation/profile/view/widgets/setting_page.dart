@@ -272,19 +272,16 @@ void _showLogoutBottomSheet(BuildContext context) {
             ),
             const SizedBox(height: 32),
 
-            // Logout Button
+            
             SizedBox(
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
                 onPressed: () {
-                  // Add your actual logout logic here
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, RouteName.LoginSignupScreen);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(
-                    0xFFF0444F,
-                  ), // Red shade from pic
+                  backgroundColor: const Color(0xFFF0444F),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -302,14 +299,13 @@ void _showLogoutBottomSheet(BuildContext context) {
             ),
             const SizedBox(height: 12),
 
-            // Cancel Button
             SizedBox(
               width: double.infinity,
               height: 55,
               child: OutlinedButton(
                 onPressed: () => Navigator.pop(context),
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.grey.shade200),
+                  side: BorderSide(color: ColorManager.black12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

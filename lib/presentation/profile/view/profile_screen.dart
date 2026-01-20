@@ -148,7 +148,6 @@ class ProfileScreen extends ConsumerWidget {
 
                 const Divider(height: 1),
 
-                // 🔹 TAB CONTENT
                 Expanded(
                   child: selectedTab == 0
                       ? ListView.builder(
@@ -160,7 +159,6 @@ class ProfileScreen extends ConsumerWidget {
                       : const InfoView(),
                 ),
 
-                // 🔹 SAVE BUTTON
                 if (isEditing)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 10),
