@@ -2,7 +2,7 @@ import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/legacy.dart';
 
-import '../../../../data/models/ad_model.dart';
+import '../../../data/models/ad_model.dart';
 
 final selectedStatusProvider =
     StateProvider<AdStatus?>((ref) => null);

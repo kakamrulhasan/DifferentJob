@@ -11,6 +11,7 @@ import '../../widgets/search_bar_widget.dart';
 import '../viewmodel/all_category_provider.dart';
 import '../viewmodel/categories_provider.dart';
 import 'widgets/home_sublist.dart';
+import 'widgets/location_widgets.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   HomeScreen({super.key});
@@ -196,7 +197,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                           const SizedBox(height: 10),
 
-                          // Subcategories List
                           if (gridIndex != -1)
                             ListView.builder(
                               shrinkWrap: true,
@@ -247,12 +247,104 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ],
                       ),
                     )
-                  : ListView.builder(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: allPosts.length,
-                      itemBuilder: (context, index) {
-                        return PostCard(post: allPosts[index]);
-                      },
+                  : Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Filter by Location',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2D3142),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          buildLabel("Country"),
+                          buildDropdownContainer("USA"),
+
+                          const SizedBox(height: 20),
+
+                          buildLabel("State/Province"),
+                          buildDropdownContainer("California"),
+
+                          const SizedBox(height: 20),
+
+                          buildLabel("City"),
+                          TextField(
+                            decoration: InputDecoration(
+                              hintText: "e.g., New York City",
+                              hintStyle: const TextStyle(
+                                color: ColorManager.secondary,
+                                fontSize: 14,
+                              ),
+                              filled: true,
+                              fillColor: ColorManager.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 16,
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 20),
+
+                          Row(
+                            children: [
+                              SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: Checkbox(
+                                  value: false,
+                                  onChanged: (val) {},
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              const Text(
+                                "Auto detect my current location",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const Spacer(),
+
+                          SizedBox(
+                            width: double.infinity,
+                            height: 55,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorManager.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: const Text(
+                                "Apply Filter",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
                     ),
             ),
           ],
@@ -261,3 +353,4 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
+
