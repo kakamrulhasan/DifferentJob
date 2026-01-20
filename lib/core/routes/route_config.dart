@@ -27,10 +27,25 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ForgetOptScreen());
       case RouteName.SetNewPassword:
         return MaterialPageRoute(builder: (_) => SetNewPassword());
-        case RouteName.bottomNavigationBar:
-        return MaterialPageRoute(builder: (_) => BottomNavPage ());
+      case RouteName.bottomNavigationBar:
+        return MaterialPageRoute(builder: (_) => BottomNavPage());
       case RouteName.HomeScreen:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case RouteName.ProfileScreen:
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case RouteName.settingsScreen:
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
+      case RouteName.GeneralSettings:
+        return MaterialPageRoute(builder: (_) => GeneralSettings());
+      case RouteName.NotificationSettings:
+        return MaterialPageRoute(builder: (_) => NotificationsSettings());
+      case RouteName.AccountsSettings:
+        return MaterialPageRoute(builder: (_) => AccountsSettings());
+      case RouteName.PrivacyPolicy:
+        return MaterialPageRoute(builder: (_) => PrivacyPolicyScreen());
+        case RouteName.AboutLocal:
+        return MaterialPageRoute(builder: (_)=>AboutLocalScreen());
+
       default:
         return MaterialPageRoute(
           builder: (_) =>

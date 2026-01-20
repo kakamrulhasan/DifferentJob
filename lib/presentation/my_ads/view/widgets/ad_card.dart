@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/core/constansts/color_manager.dart';
 import '../../../../data/models/ad_model.dart';
 
 class AdCard extends StatelessWidget {
@@ -37,14 +38,13 @@ class AdCard extends StatelessWidget {
           ),
           const SizedBox(width: 12),
 
-          // 2. Content Section
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    _buildPill(ad.category, const Color(0xFFF3E5F5), const Color(0xFF7B1FA2)),
+                    _buildPill(ad.category,ColorManager.white, const Color(0xFF7B1FA2)),
                     const Spacer(),
                     _buildStatusPill(ad.status),
                     const SizedBox(width: 8),

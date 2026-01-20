@@ -1,7 +1,7 @@
 
 import 'package:flutter_application_5/data/models/post_model.dart';
 
-import '../../core/constansts/image_manager.dart';
+import '../../../../core/constansts/image_manager.dart';
 
 final List<PostModel> allPosts = [
   PostModel(

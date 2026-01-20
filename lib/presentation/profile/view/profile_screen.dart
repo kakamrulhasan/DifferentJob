@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/presentation/profile/view/widgets/setting_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/constansts/color_manager.dart';
+import '../../../core/routes/route_name.dart';
 import '../../widgets/post_card.dart';
 import '../viewmodel/edit_model_provider.dart';
 import '../viewmodel/post_provider.dart';
@@ -21,16 +22,39 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ColorManager.backgroundColor,
       body: Stack(
+        clipBehavior: Clip.none,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24),
-            ),
-            child: Container(
-              height: 180,
-              width: double.infinity,
+          Container(
+            height: 180,
+            width: double.infinity,
+            decoration: const BoxDecoration(
               color: ColorManager.primary,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
+              ),
+            ),
+          ),
+
+          Positioned(
+            top: 135,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: ColorManager.white, width: 2),
+                ),
+                child: ClipOval(
+                  child: Image.network(
+                    'https://i.pravatar.cc/300?img=12',
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
           ),
 
@@ -55,7 +79,7 @@ class ProfileScreen extends ConsumerWidget {
                           icon: Icon(
                             Icons.person_add_alt_1_outlined,
                             color: isEditing
-                                ? ColorManager.transparent
+                                ? Colors.transparent
                                 : ColorManager.white,
                           ),
                           onPressed: isEditing
@@ -70,16 +94,14 @@ class ProfileScreen extends ConsumerWidget {
                                 },
                         ),
                         const SizedBox(width: 10),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => SettingsScreen(),
-                              ),
+                              RouteName.settingsScreen,
                             );
                           },
-                          icon: Icon(
+                          child: const Icon(
                             Icons.settings_outlined,
                             color: ColorManager.white,
                           ),
@@ -89,34 +111,18 @@ class ProfileScreen extends ConsumerWidget {
                   ],
                 ),
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 130),
 
-                Positioned(
-                  bottom: -45,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: ColorManager.white, width: 2),
-                    ),
-                    child: ClipOval(
-                      child: Image.network(
-                        'https://i.pravatar.cc/300?img=12',
-                        width: 90,
-                        height: 90,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
                 const Text(
                   'John Doe',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
+                const SizedBox(height: 4),
                 const Text('Austin, TX', style: TextStyle(color: Colors.grey)),
 
                 const SizedBox(height: 20),
 
+                // 🔹 TABS
                 Row(
                   children: [
                     Expanded(
@@ -139,8 +145,10 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
+
                 const Divider(height: 1),
 
+                // 🔹 TAB CONTENT
                 Expanded(
                   child: selectedTab == 0
                       ? ListView.builder(
@@ -152,6 +160,7 @@ class ProfileScreen extends ConsumerWidget {
                       : const InfoView(),
                 ),
 
+                // 🔹 SAVE BUTTON
                 if (isEditing)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 10),

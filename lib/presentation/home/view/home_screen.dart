@@ -5,7 +5,7 @@ import 'package:flutter_application_5/core/constansts/image_manager.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/home_tab_item.dart';
 import 'package:flutter_application_5/presentation/home/view/widgets/searchbar.dart';
 import 'package:flutter_application_5/presentation/home/viewmodel/home_tab_provider.dart';
-import '../../../data/sources/post_data.dart';
+import 'widgets/post_data.dart';
 import '../../widgets/post_card.dart';
 import '../../widgets/search_bar_widget.dart';
 import '../viewmodel/all_category_provider.dart';
@@ -353,4 +353,3 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
-

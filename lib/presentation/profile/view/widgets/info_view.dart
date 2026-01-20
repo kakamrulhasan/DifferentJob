@@ -49,8 +49,7 @@ class InfoView extends ConsumerWidget {
               if (isEditing) ...[
                 const SizedBox(height: 15),
                 GestureDetector(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
@@ -63,8 +62,11 @@ class InfoView extends ConsumerWidget {
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text("Add ", style: TextStyle(color: Colors.white)),
-                        Icon(Icons.add, color: Colors.white, size: 18),
+                        Text(
+                          "Add ",
+                          style: TextStyle(color: ColorManager.white),
+                        ),
+                        Icon(Icons.add, color: ColorManager.white, size: 18),
                       ],
                     ),
                   ),
@@ -118,7 +120,6 @@ class InfoView extends ConsumerWidget {
                 ),
               ),
 
-              // PENCIL ICON: Only visible when isEditing is true
               if (isEditing)
                 const Icon(Icons.edit_outlined, size: 20, color: Colors.grey),
             ],
@@ -134,7 +135,7 @@ class InfoView extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: const Color(0xFFF0F2F5),
+        color: ColorManager.black10,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -142,16 +143,27 @@ class InfoView extends ConsumerWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              color: Color(0xFF535F70),
+            style: TextStyle(
+              color: ColorManager.black54,
               fontSize: 13,
               fontWeight: FontWeight.w500,
             ),
           ),
-          // X ICON: Only visible when isEditing is true
           if (isEditing) ...[
             const SizedBox(width: 8),
-            const Icon(Icons.close, size: 14, color:ColorManager.secondary),
+            Container(
+              width: 16, 
+              height: 16, 
+              decoration: BoxDecoration(
+                color: ColorManager.white, 
+                shape: BoxShape.circle, 
+              ),
+              child: const Icon(
+                Icons.close,
+                size: 12, 
+                color: ColorManager.black, 
+              ),
+            ),
           ],
         ],
       ),

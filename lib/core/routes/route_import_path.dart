@@ -13,6 +13,13 @@ import 'package:flutter_application_5/presentation/auth/view/screen/set_new_pass
 import 'package:flutter_application_5/presentation/auth/view/screen/verify_code_screen.dart';
 import 'package:flutter_application_5/presentation/home/view/home_screen.dart';
 import 'package:flutter_application_5/presentation/onboarding/view/onboarding_screen.dart';
+import 'package:flutter_application_5/presentation/profile/view/profile_screen.dart';
+import 'package:flutter_application_5/presentation/profile/view/widgets/about_local.dart';
+import 'package:flutter_application_5/presentation/profile/view/widgets/account_settings.dart';
+import 'package:flutter_application_5/presentation/profile/view/widgets/general_settings.dart';
+import 'package:flutter_application_5/presentation/profile/view/widgets/notification_settings.dart';
+import 'package:flutter_application_5/presentation/profile/view/widgets/privacy_policy.dart';
+import 'package:flutter_application_5/presentation/profile/view/widgets/setting_page.dart';
 import 'package:flutter_application_5/presentation/splash/view/splash_screen.dart';
 
 import '../../presentation/bottom_nav/view/bottom_nav_bar.dart';

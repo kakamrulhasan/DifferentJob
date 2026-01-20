@@ -14,4 +14,13 @@ class RouteName {
   static const String bottomNavigationBar = '/bottomnavBar';
 
   static const String HomeScreen = '/homeScreen';
+  static const String ProfileScreen = '/profileScreen';
+  static const String settingsScreen = '/settingScreen';
+  static const String GeneralSettings  = '/generalSettings';
+  static const String NotificationSettings = '/notificationSettings';
+  static const String LocationGps  = '/locationGps';
+  static const String SecuritySettings = '/securitySettings';
+  static const String PrivacyPolicy = '/privacyPolicy';
+  static const String AboutLocal = '/aboutLocal';
+  static const String AccountsSettings = '/accountSettings';
 }

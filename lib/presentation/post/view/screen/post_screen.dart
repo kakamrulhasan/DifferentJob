@@ -4,7 +4,7 @@ import 'package:flutter_application_5/presentation/post/view/widgets/post_detail
 import 'package:flutter_application_5/presentation/post/viewmodel/selected_category_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../data/sources/category_data.dart';
+import '../../../home/view/widgets/category_data.dart';
 
 // Your screen
 class PostScreen extends ConsumerWidget {

@@ -28,38 +28,51 @@ class BottomNavPage extends ConsumerWidget {
           ProfileScreen(),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorManager.primary,
-        unselectedItemColor: ColorManager.black54,
-        backgroundColor: ColorManager.backgroundColor,
-        onTap: (index) {
-          ref.read(bottomNavProvider.notifier).state = index;
-        },
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: ColorManager.backgroundColor,
+          boxShadow: [
+            BoxShadow(
+              color: ColorManager.black12,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          currentIndex: selectedIndex,
 
-        items: const [
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageManager.home)),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageManager.myads)),
-            label: 'My Ad',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageManager.post)),
-            label: 'Post',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageManager.message)),
-            label: 'Message',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageManager.user)),
-            label: 'Profile',
-          ),
-        ],
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: ColorManager.primary,
+          unselectedItemColor: ColorManager.black54,
+          backgroundColor: ColorManager.backgroundColor,
+          onTap: (index) {
+            ref.read(bottomNavProvider.notifier).state = index;
+          },
+
+          items: const [
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageManager.home)),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageManager.myads)),
+              label: 'My Ad',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageManager.post)),
+              label: 'Post',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageManager.message)),
+              label: 'Message',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageManager.user)),
+              label: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }
